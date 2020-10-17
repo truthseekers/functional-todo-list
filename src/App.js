@@ -41,19 +41,20 @@ function App() {
     setTextField(event.target.value);
   };
 
-  <form>
-    <label>
-      <input
-        type="text"
-        placeholder="Todo Item"
-        value={textField}
-        onChange={handleNameFieldChange}
-        name="name"
-      />
-    </label>
-  </form>;
   return (
     <div className="App">
+      <form>
+        <label>
+          <input
+            type="text"
+            placeholder="Todo Item"
+            value={textField}
+            onChange={handleNameFieldChange}
+            name="name"
+          />
+        </label>
+      </form>
+
       <TodoList todos={todos} />
     </div>
   );
