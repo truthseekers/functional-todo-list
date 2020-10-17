@@ -35,6 +35,23 @@ function TodoList(props) {
 
 function App() {
   const [todos, setTodos] = useState(initialTodos);
+  const [textField, setTextField] = useState("");
+
+  const handleNameFieldChange = (event) => {
+    setTextField(event.target.value);
+  };
+
+  <form>
+    <label>
+      <input
+        type="text"
+        placeholder="Todo Item"
+        value={textField}
+        onChange={handleNameFieldChange}
+        name="name"
+      />
+    </label>
+  </form>;
   return (
     <div className="App">
       <TodoList todos={todos} />
