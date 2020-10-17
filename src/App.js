@@ -25,21 +25,34 @@ function TodoItem(props) {
 }
 
 function TodoList(props) {
-  const todos = [];
+  const incompleteTodos = [];
+  const completeTodos = [];
   props.todos.map((elem) => {
-    todos.push(
-      <TodoItem
-        key={elem.id}
-        title={elem.title}
-        isCompleted={elem.isCompleted}
-      />
-    );
+    if (elem.isCompleted) {
+      completeTodos.push(
+        <TodoItem
+          key={elem.id}
+          title={elem.title}
+          isCompleted={elem.isCompleted}
+        />
+      );
+    } else {
+      incompleteTodos.push(
+        <TodoItem
+          key={elem.id}
+          title={elem.title}
+          isCompleted={elem.isCompleted}
+        />
+      );
+    }
   });
 
   return (
     <div>
-      <h3>todo List items:</h3>
-      <ul>{todos}</ul>
+      <h3>Incomplete Todos:</h3>
+      <ul style={{ listStyleType: "none" }}>{incompleteTodos}</ul>
+      <h3>Complete Todos:</h3>
+      <ul style={{ listStyleType: "none" }}>{completeTodos}</ul>
     </div>
   );
 }
