@@ -16,13 +16,24 @@ const initialTodos = [
 ];
 
 function TodoItem(props) {
-  return <li>Todo Item: {props.title}</li>;
+  return (
+    <li>
+      <input type="checkbox" checked={props.isCompleted} />
+      Todo Item: {props.title}
+    </li>
+  );
 }
 
 function TodoList(props) {
   const todos = [];
   props.todos.map((elem) => {
-    todos.push(<TodoItem key={elem.id} title={elem.title} />);
+    todos.push(
+      <TodoItem
+        key={elem.id}
+        title={elem.title}
+        isCompleted={elem.isCompleted}
+      />
+    );
   });
 
   return (
