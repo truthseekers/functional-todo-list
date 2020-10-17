@@ -16,9 +16,18 @@ const initialTodos = [
 ];
 
 function TodoItem(props) {
+  const updateTodo = () => {
+    console.log("Updated todo item: ", props.id);
+    props.updateTodo(props.id);
+  };
+
   return (
     <li>
-      <input type="checkbox" checked={props.isCompleted} />
+      <input
+        type="checkbox"
+        onChange={updateTodo}
+        checked={props.isCompleted}
+      />
       Todo Item: {props.title}
     </li>
   );
@@ -32,16 +41,20 @@ function TodoList(props) {
       completeTodos.push(
         <TodoItem
           key={elem.id}
+          id={elem.id}
           title={elem.title}
           isCompleted={elem.isCompleted}
+          updateTodo={props.updateTodo}
         />
       );
     } else {
       incompleteTodos.push(
         <TodoItem
           key={elem.id}
+          id={elem.id}
           title={elem.title}
           isCompleted={elem.isCompleted}
+          updateTodo={props.updateTodo}
         />
       );
     }
@@ -75,6 +88,17 @@ function App() {
     setTextField("");
   };
 
+  const updateTodo = (updatedId) => {
+    console.log("updatedId in App()", updatedId);
+    let newTodos = [...todos];
+    newTodos.forEach((elem) => {
+      if (elem.id == updatedId) {
+        elem.isCompleted = !elem.isCompleted;
+      }
+    });
+    setTodos(newTodos);
+  };
+
   return (
     <div className="App">
       <form onSubmit={handleSubmit}>
@@ -90,7 +114,7 @@ function App() {
         <input type="submit" value="Submit" />
       </form>
 
-      <TodoList todos={todos} />
+      <TodoList updateTodo={updateTodo} todos={todos} />
     </div>
   );
 }
