@@ -15,15 +15,29 @@ const initialTodos = [
   },
 ];
 
+function TodoItem(props) {
+  return <li>Todo Item: {props.title}</li>;
+}
+
 function TodoList(props) {
-  return <div>todo List items:</div>;
+  const todos = [];
+  props.todos.map((elem) => {
+    todos.push(<TodoItem key={elem.id} title={elem.title} />);
+  });
+
+  return (
+    <div>
+      <h3>todo List items:</h3>
+      <ul>{todos}</ul>
+    </div>
+  );
 }
 
 function App() {
   const [todos, setTodos] = useState(initialTodos);
   return (
     <div className="App">
-      <TodoList />
+      <TodoList todos={todos} />
     </div>
   );
 }
