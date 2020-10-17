@@ -41,9 +41,19 @@ function App() {
     setTextField(event.target.value);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let newTodos = [
+      ...todos,
+      { id: todos.length, title: textField, isCompleted: false },
+    ];
+    setTodos(newTodos);
+    setTextField("");
+  };
+
   return (
     <div className="App">
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>
           <input
             type="text"
@@ -53,6 +63,7 @@ function App() {
             name="name"
           />
         </label>
+        <input type="submit" value="Submit" />
       </form>
 
       <TodoList todos={todos} />
