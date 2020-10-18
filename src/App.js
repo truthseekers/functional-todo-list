@@ -21,6 +21,11 @@ function TodoItem(props) {
     props.updateTodo(props.id);
   };
 
+  const deleteTodo = () => {
+    console.log("props.id", props.id);
+    props.deleteTodo(props.id);
+  };
+
   return (
     <li>
       <input
@@ -28,7 +33,10 @@ function TodoItem(props) {
         onChange={updateTodo}
         checked={props.isCompleted}
       />
-      Todo Item: {props.title}
+      Todo Item: {props.title}{" "}
+      <span style={{ fontWeight: "bold" }} onClick={deleteTodo}>
+        Delete
+      </span>
     </li>
   );
 }
@@ -45,6 +53,7 @@ function TodoList(props) {
           title={elem.title}
           isCompleted={elem.isCompleted}
           updateTodo={props.updateTodo}
+          deleteTodo={props.deleteTodo}
         />
       );
     } else {
@@ -55,6 +64,7 @@ function TodoList(props) {
           title={elem.title}
           isCompleted={elem.isCompleted}
           updateTodo={props.updateTodo}
+          deleteTodo={props.deleteTodo}
         />
       );
     }
@@ -99,6 +109,12 @@ function App() {
     setTodos(newTodos);
   };
 
+  const deleteTodo = (deleteId) => {
+    console.log(deleteId);
+    let newTodos = todos.filter((elem) => elem.id !== deleteId);
+    setTodos(newTodos);
+  };
+
   return (
     <div className="App">
       <form onSubmit={handleSubmit}>
@@ -114,7 +130,7 @@ function App() {
         <input type="submit" value="Submit" />
       </form>
 
-      <TodoList updateTodo={updateTodo} todos={todos} />
+      <TodoList updateTodo={updateTodo} deleteTodo={deleteTodo} todos={todos} />
     </div>
   );
 }
